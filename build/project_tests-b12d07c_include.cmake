@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/uva74/Honors Project Math/NeuralNetHM/build/project_tests-b12d07c_tests.cmake")
+  include("C:/Users/uva74/Honors Project Math/NeuralNetHM/build/project_tests-b12d07c_tests.cmake")
+else()
+  add_test(project_tests_NOT_BUILT-b12d07c project_tests_NOT_BUILT-b12d07c)
+endif()
