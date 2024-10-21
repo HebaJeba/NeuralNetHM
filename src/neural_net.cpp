@@ -7,6 +7,31 @@ class Neuron{};
 
 
 
+struct Connection{
+	double weight;
+	double deltaWeight; 
+};
+
+// ********************** class Neuron ***************
+
+class Neuron{
+	public:
+		Neuron(unsigned numOutputs);
+	private:
+		double m_outputVal; 
+		vector<Connection> m_outputWeights; 
+
+
+};
+
+Neuron::Neuron(unsigned numOutputs){
+	for (unsigned c = 0; c < numOutputs; ++c){
+		m_outputWeights.push_back(Connection());
+		
+	}
+}
+
+//****************** class Net ********************* */
 class Net{
 	public:
 		Net(const vector<unsigned> &topology);
@@ -25,10 +50,17 @@ Net::Net(const vector<unsigned> &topology){
 	for (unsigned layerNum = 0; layerNum < numLayers; ++layerNum){
 		// each iteration we create a new layer and add to m_layers
 		m_layers.push_back(Layer()); //layer object added to vector
+		unsigned numOutputs;
+		if (layerNum == topology.size()-1){
+			numOutputs = 1;
+		} 
+		else{
+			numOutputs = topology.at(layerNum + 1);
+		}
 		//after creating new layer we next add ith neurons
 		// add bias neuron to the layer
 		for (unsigned neuronNum = 0; neuronNum <= topology.at(layerNum); ++neuronNum){
-			m_layers.back().push_back(Neuron());
+			m_layers.back().push_back(Neuron(numOutputs));
 			cout << "Made a Neuron" << endl; 
 		}
 	}
@@ -44,6 +76,8 @@ constructor needs to make neurons
  all of the neurons arranged in layers
  net can have array of layers
  
+
+ connection weights
 
 
 */
